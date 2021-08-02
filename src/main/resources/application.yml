@@ -1,0 +1,43 @@
+spring:
+  datasource: 
+    url: ${fiordex.database.url}
+    username: ${fiordex.database.user}
+    password: ${fiordex.database.pass}
+    driver-class-name: com.mysql.cj.jdbc.Driver 
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect      
+  thymeleaf:
+    cache: false 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      
+server:
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    context-path: /api/v1
+    session:
+      cookie:
+        http-only: true
+      tracking-modes:
+      - cookie
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    guru.springframework.controllers: DEBUG
+    org.hibernate: DEBUG
+  file:
+    name: logs/dev_app.log
+
+fiordex:
+  carpeta:
+    fotos: web-files
