@@ -6,16 +6,17 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
@@ -35,8 +36,13 @@ public abstract class Auditoria implements Serializable {
 	@Column(name = "activo", columnDefinition = "Bit(1) default true")
 	protected boolean activo = true;
 
+	@PrePersist
+	public void alta() {
+		this.activo = true;
+	}
+	
 	public void baja() {
 		this.activo = false;
 	}
-
+	
 }

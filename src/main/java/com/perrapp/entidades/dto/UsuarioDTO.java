@@ -3,6 +3,9 @@ package com.perrapp.entidades.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
+@JsonInclude(Include.NON_NULL)
 public final class UsuarioDTO extends AuditoriaDTO {
 
 	private static final long serialVersionUID = 4071780217025039863L;
@@ -22,6 +26,8 @@ public final class UsuarioDTO extends AuditoriaDTO {
 	private String apellido;
 
 	private String email;
+
+	private String password;
 
 	private String dni;
 

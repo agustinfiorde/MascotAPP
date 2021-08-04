@@ -31,10 +31,10 @@ server:
       - cookie
 
 logging:
-  level:
-    org.springframework.web: DEBUG
-    guru.springframework.controllers: DEBUG
-    org.hibernate: DEBUG
+#  level:
+#    org.springframework.web: DEBUG
+#    guru.springframework.controllers: DEBUG
+#    org.hibernate: DEBUG
   file:
     name: logs/dev_app.log
 

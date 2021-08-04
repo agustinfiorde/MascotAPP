@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.perrapp.entidades.dto.ResponseDTO;
+import com.perrapp.controllers.dto.ResponseDTO;
 
 public class AuthenticationHandlerError {
 

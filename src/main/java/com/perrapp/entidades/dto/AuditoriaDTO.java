@@ -12,7 +12,7 @@ public abstract class AuditoriaDTO implements Serializable {
 
 	protected static final long serialVersionUID = 1L;
 
-	protected boolean activo;
+	protected boolean activo = true;
 
 	protected LocalDateTime alta;
 

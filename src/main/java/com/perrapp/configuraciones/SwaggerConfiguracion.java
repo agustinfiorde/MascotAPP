@@ -15,6 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 public class SwaggerConfiguracion extends WebMvcConfigurerAdapter {
 
+	// http://localhost:8080/+CONTEXT_PATH+/swagger-ui/
+	
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
