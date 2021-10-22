@@ -17,13 +17,13 @@ public class zTestController {
 	}
 	
 	@GetMapping("/user-admin")
-	@PreAuthorize("hasRole('ROLE_USUARIO') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public String userAccess() {
 		return "ambos Content.";
 	}
 
-	@GetMapping("/usuario")
-	@PreAuthorize("hasRole('ROLE_USUARIO')")
+	@GetMapping("/user")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public String moderatorAccess() {
 		return "User Board.";
 	}

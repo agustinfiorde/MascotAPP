@@ -16,38 +16,40 @@ public class ResponseDTO {
 
 	private InfoResponse info;
 	private Map<String, Object> data;
-	private String mensaje;
-	private Integer codigo;
+	private String message;
+	private Integer code;
 
-	public ResponseDTO(String mensaje) {
-		this.mensaje = mensaje;
-	}
-
-	public ResponseDTO(String labelData, Object objectData, Integer codigo) {
-		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-		this.codigo = codigo;
-	}
-
-	public ResponseDTO(String labelData, Object objectData, String mensaje) {
-		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-		this.mensaje = mensaje;
-	}
-
-	public ResponseDTO(String mensaje, Integer codigo) {
-		this.mensaje = mensaje;
-		this.codigo = codigo;
-	}
-
-	public ResponseDTO(String labelData, Object objectData, String mensaje, Integer codigo) {
-		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-		this.mensaje = mensaje;
-		this.codigo = codigo;
+	public ResponseDTO(String message) {
+		this.message = message;
 	}
 	
-	public void setCodigo(Object codigoObj) {
-		
+	public ResponseDTO(String labelData, Object objectData) {
+		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
+
+	public ResponseDTO(String labelData, Object objectData, Integer code) {
+		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		this.code = code;
+	}
+
+	public ResponseDTO(String labelData, Object objectData, String message) {
+		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		this.message = message;
+	}
+
+	public ResponseDTO(String message, Integer code) {
+		this.message = message;
+		this.code = code;
+	}
+
+	public ResponseDTO(String labelData, Object objectData, String message, Integer code) {
+		this.data = Stream.of(new AbstractMap.SimpleImmutableEntry<>(labelData, objectData))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		this.message = message;
+		this.code = code;
+	}
+	
 }

@@ -1,6 +1,6 @@
 package com.perrapp.jwt;
 
-import static com.perrapp.utilidades.SecurityConstants.TOKEN_TYPE;
+import static com.perrapp.utilities.SecurityConstants.TOKEN_TYPE;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,7 +20,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.perrapp.controllers.dto.JwtResponse;
-import com.perrapp.entidades.dto.UsuarioDTO;
+import com.perrapp.entities.dto.UserDTO;
+import com.perrapp.services.impl.UserServiceImpl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
+	private UserServiceImpl userService;
 	private AuthenticationManager authenticationManager;
 	private JwtUtils jwtUtils;
 
@@ -40,20 +42,18 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
 	}
 
-	public Object authenticateUser(HttpServletResponse res, UsuarioDTO usuario) {
+	public Object authenticateUser(HttpServletResponse res, UserDTO usuario) {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getPassword()));
 
+		usuario = userService.findByEmail(usuario.getEmail());
+		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		jwtUtils.setHeaderData(jwt, res);
 
-		List<String> roles = authentication.getAuthorities().stream().map((e) -> e.getAuthority())
-				.collect(Collectors.toList());
-
-		return new JwtResponse(jwt, jwtUtils.getJwtExpirationMs().toString(), TOKEN_TYPE, usuario.getId(),
-				usuario.getEmail(), roles);
+		return new JwtResponse(jwt, jwtUtils.getJwtExpirationMs().toString(), TOKEN_TYPE, usuario);
 	}
 
 }

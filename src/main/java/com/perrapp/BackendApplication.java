@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 
-import com.perrapp.servicios.RolService;
+import com.perrapp.services.RolService;
+import com.perrapp.utilities.FileUtility;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 public class BackendApplication {
 
+
+	
 	public static void main(String[] args) {
 		
 //		SpringApplication.run(BackendApplication.class, args);
@@ -23,7 +26,11 @@ public class BackendApplication {
 		
 		ConfigurableApplicationContext app = SpringApplication.run(BackendApplication.class, args);
 		RolService rolService = (RolService) app.getBean("RolService");
-		rolService.generarRoles();
+		rolService.generateRoles();
+		
+		FileUtility fileUtility = (FileUtility) app.getBean("FileUtility");
+		fileUtility.rootDirectory();
+		
 	}
 
 }

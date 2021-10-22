@@ -1,9 +1,8 @@
 package com.perrapp.controllers.dto;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.perrapp.entities.dto.UserDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +18,6 @@ public final class JwtResponse {
 	private String exipresIn;
 	private String type;
 	
-	private String id;
-	private String email;
-	private List<String> roles;
+	private UserDTO user;
 	
 }

@@ -1,8 +1,8 @@
 package com.perrapp.jwt;
 
 
-import static com.perrapp.utilidades.SecurityConstants.HEADER_NAME;
-import static com.perrapp.utilidades.SecurityConstants.TOKEN_TYPE;
+import static com.perrapp.utilities.SecurityConstants.HEADER_NAME;
+import static com.perrapp.utilities.SecurityConstants.TOKEN_TYPE;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.perrapp.servicios.impl.UsuarioServiceImpl;
+import com.perrapp.services.impl.UserServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +29,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtUtils jwtUtils;
 	@Autowired
-	private UsuarioServiceImpl userDetailsService;
+	private UserServiceImpl userDetailsService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

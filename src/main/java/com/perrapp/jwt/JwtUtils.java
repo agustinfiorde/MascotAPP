@@ -1,7 +1,7 @@
 package com.perrapp.jwt;
 
-import static com.perrapp.utilidades.SecurityConstants.TOKEN_TYPE;
-import static com.perrapp.utilidades.SecurityConstants.HEADER_NAME;
+import static com.perrapp.utilities.SecurityConstants.HEADER_NAME;
+import static com.perrapp.utilities.SecurityConstants.TOKEN_TYPE;
 
 import java.util.Date;
 
