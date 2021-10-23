@@ -1,5 +1,6 @@
 HELP.md
 target/
+web-files/
 logs/
 bin/
 !.mvn/wrapper/maven-wrapper.jar

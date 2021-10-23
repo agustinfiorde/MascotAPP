@@ -10,11 +10,15 @@ public final class Constants {
 	public static final String ROL = "/rol";
 	
 	public static final String LIST = "/list";
+	public static final String LIST_ACTIVES = "/list-actives";
+	public static final String LIST_ID = "/list/{id}";
 	public static final String REGISTER = "/register";
 	public static final String LOGIN = "/login";
 	
 	public static final String DETAIL = "/detail";
 	public static final String SAVE = "/save";
 	public static final String EDIT = "/edit";
-	public static final String DELETE = "/delete";
+	public static final String DELETE = "/delete/{id}";
+	public static final String CANCEL = "/cancel/{id}";
+	public static final String FAV = "/fav/{userId}/{petId}";
 }

@@ -18,6 +18,7 @@ import com.perrapp.entities.User;
 import com.perrapp.entities.converters.UserConverter;
 import com.perrapp.entities.dto.UserDTO;
 import com.perrapp.errors.MascotAppException;
+import com.perrapp.repositories.PetRepository;
 import com.perrapp.repositories.UserRepository;
 import com.perrapp.services.CRUDService;
 import com.perrapp.services.UserService;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 
 	private RolServiceImpl rolServiceImpl;
 	private UserRepository userRepository;
+	private PetRepository petRepository;
 	private UserConverter usuarioConverter;
 	private PasswordEncoder encoder;
 
@@ -48,21 +50,27 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 	public UserDTO edit(UserDTO d) throws MascotAppException {
 
 		User e;
-
+		
 		if (d.getPassword().length() > 0) {
 			d.setPassword(encoder.encode(d.getPassword()));
 		}
-
-		validator(d);
 
 		if (d.getPassword() == null) {
 			e = userRepository.getById(d.getId());
 			String pass = e.getPassword();
 			d.setPassword(pass);
 		}
+
+		validator(d);
 		e = userRepository.save(usuarioConverter.dtoToEntity(d));
 
 		return usuarioConverter.entityToDto(e);
+	}
+
+	public UserDTO favoritePet(String userId, String petId) throws MascotAppException {
+		User u = userRepository.getById(userId);
+		u.setFavoritePet(petRepository.getById(petId));
+		return usuarioConverter.entityToDto(userRepository.save(u));
 	}
 
 	@Override
