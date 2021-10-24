@@ -10,20 +10,23 @@ import com.perrapp.entities.Role;
 import com.perrapp.entities.converters.RoleConverter;
 import com.perrapp.entities.dto.RoleDTO;
 import com.perrapp.enums.RoleEnum;
-import com.perrapp.repositories.RolRepository;
-import com.perrapp.services.RolService;
+import com.perrapp.repositories.RoleRepository;
+import com.perrapp.services.RoleService;
+
+import lombok.AllArgsConstructor;
 
 @Service("RolService")
-public class RolServiceImpl implements RolService {
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+public class RoleServiceImpl implements RoleService {
 
-	private RolRepository rolRepository;
+	private RoleRepository rolRepository;
 	private RoleConverter rolConverter;
 
-	@Autowired
-	public RolServiceImpl(RolRepository rolRepository, RoleConverter rolConverter) {
-		this.rolRepository = rolRepository;
-		this.rolConverter = rolConverter;
-	}
+//	@Autowired
+//	public RoleServiceImpl(RoleRepository rolRepository, RoleConverter rolConverter) {
+//		this.rolRepository = rolRepository;
+//		this.rolConverter = rolConverter;
+//	}
 
 	@Override
 	public void generateRoles() {

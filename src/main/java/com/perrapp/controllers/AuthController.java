@@ -18,7 +18,7 @@ import com.perrapp.controllers.dto.ResponseDTO;
 import com.perrapp.entities.dto.UserDTO;
 import com.perrapp.errors.MascotAppException;
 import com.perrapp.jwt.AuthEntryPointJwt;
-import com.perrapp.services.impl.UserServiceImpl;
+import com.perrapp.services.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -29,16 +29,15 @@ import lombok.AllArgsConstructor;
 public class AuthController {
 
 	private AuthEntryPointJwt authEntryPointJwt;
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@PostMapping(LOGIN)
-	public ResponseEntity<ResponseDTO> login(HttpServletResponse res, @Valid @RequestBody UserDTO usuario) {
-		
-		return ResponseEntity.ok(new ResponseDTO("token",authEntryPointJwt.authenticateUser(res, usuario), "Wachin Logueado!!!!"));
+	public ResponseEntity<ResponseDTO> login(HttpServletResponse res, @Valid @RequestBody UserDTO dto) {
+		return ResponseEntity.ok(new ResponseDTO("token",authEntryPointJwt.authenticateUser(res, dto), "User Logueado"));
 	}
 
 	@PostMapping(REGISTER)
-	public ResponseEntity<ResponseDTO> registerUser(@Valid @RequestBody UserDTO dto) throws MascotAppException {
-		return ResponseEntity.ok(new ResponseDTO("user",userService.save(dto), "El Wuachin se cargo bien"));
+	public ResponseEntity<ResponseDTO> registerUser(@Valid @RequestBody UserDTO dto) throws Exception, MascotAppException {
+		return ResponseEntity.ok(new ResponseDTO("user",userService.save(dto), "El Usuario se cargo bien"));
 	}
 }

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.perrapp.controllers.dto.ResponseDTO;
 import com.perrapp.entities.dto.PetDTO;
 import com.perrapp.errors.MascotAppException;
-import com.perrapp.services.impl.PetServiceImpl;
+import com.perrapp.services.PetService;
 
 import lombok.AllArgsConstructor;
 
@@ -33,7 +33,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PetController {
 
-	private PetServiceImpl petService;
+	private PetService petService;
 
 	@PostMapping(SAVE)
 	public ResponseEntity<ResponseDTO> save(@Valid @RequestBody PetDTO dto) throws Exception {
@@ -58,7 +58,7 @@ public class PetController {
 	@PatchMapping(CANCEL)
 	public ResponseEntity<ResponseDTO> delete(@PathVariable String id) throws MascotAppException {
 		return ResponseEntity
-				.ok(new ResponseDTO("Se dio de baja la mascota " + petService.desactivatePet(id).getNickname()));
+				.ok(new ResponseDTO("Se dio de baja la mascota " + petService.desactivate(id).getNickname()));
 	}
 
 }

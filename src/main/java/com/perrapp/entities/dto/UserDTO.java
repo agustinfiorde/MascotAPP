@@ -25,6 +25,7 @@ public final class UserDTO extends AuditDTO {
 	private String name;
 	private String lastName;
 
+//	@NotBlank(message = "Email es necesario")
 	private String email;
 
 	private String password;
@@ -33,8 +34,11 @@ public final class UserDTO extends AuditDTO {
 
 	private List<PetDTO> pets = new ArrayList<PetDTO>();
 	
+	private String rolesSelected = "";
+	
 	private PetDTO favoritePet;
 	
 	private PictureDTO profilePicture;
+	private String profilePictureB64;
 
 }

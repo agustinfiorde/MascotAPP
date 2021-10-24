@@ -7,6 +7,5 @@ import com.perrapp.entities.Picture;
 
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, String> {
-	
 
 }

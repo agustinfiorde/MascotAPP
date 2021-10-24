@@ -19,7 +19,7 @@ public class zTestController {
 	@GetMapping("/user-admin")
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public String userAccess() {
-		return "ambos Content.";
+		return "Ambos Content.";
 	}
 
 	@GetMapping("/user")

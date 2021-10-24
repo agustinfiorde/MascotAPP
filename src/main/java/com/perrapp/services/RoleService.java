@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.perrapp.entities.dto.RoleDTO;
 
-public interface RolService {
+public interface RoleService {
 
 	void generateRoles();
 

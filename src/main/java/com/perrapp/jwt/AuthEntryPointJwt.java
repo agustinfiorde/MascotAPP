@@ -3,8 +3,6 @@ package com.perrapp.jwt;
 import static com.perrapp.utilities.SecurityConstants.TOKEN_TYPE;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +41,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 	}
 
 	public Object authenticateUser(HttpServletResponse res, UserDTO usuario) {
+		
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), usuario.getPassword()));
 

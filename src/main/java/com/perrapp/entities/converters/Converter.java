@@ -10,7 +10,7 @@ import org.springframework.expression.ParseException;
 public abstract class Converter<E extends Object, D extends Object> {
 
 	@Autowired
-	ModelMapper modelMapper;
+	protected ModelMapper modelMapper;
 
 	public abstract D entityToDto(E entity);
 

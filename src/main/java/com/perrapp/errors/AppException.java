@@ -1,12 +1,15 @@
 package com.perrapp.errors;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
+
+import lombok.Getter;
 
 @Getter
 public class AppException extends Exception {
 
-    private final HttpStatus status;
+	private static final long serialVersionUID = 1L;
+	
+	private final HttpStatus status;
 
     public AppException(String message) {
         super(message);

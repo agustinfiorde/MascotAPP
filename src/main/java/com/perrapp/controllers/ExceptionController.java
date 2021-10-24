@@ -22,7 +22,7 @@ public class ExceptionController {
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity<ErrorResponse> badCredentialsException(BadCredentialsException exception) {
 		return new ResponseEntity<ErrorResponse>(
-				new ErrorResponse(500, exception.getMessage(), "Error en el usuario o password"),
+				new ErrorResponse(500, exception.getMessage(), "Error en el email o password"),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

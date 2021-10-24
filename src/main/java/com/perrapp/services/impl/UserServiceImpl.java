@@ -20,16 +20,15 @@ import com.perrapp.entities.dto.UserDTO;
 import com.perrapp.errors.MascotAppException;
 import com.perrapp.repositories.PetRepository;
 import com.perrapp.repositories.UserRepository;
-import com.perrapp.services.CRUDService;
 import com.perrapp.services.UserService;
 
 import lombok.AllArgsConstructor;
 
 @Service("UserService")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
-	private RolServiceImpl rolServiceImpl;
+	private RoleServiceImpl rolServiceImpl;
 	private UserRepository userRepository;
 	private PetRepository petRepository;
 	private UserConverter usuarioConverter;
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 	public UserDTO edit(UserDTO d) throws MascotAppException {
 
 		User e;
-		
+
 		if (d.getPassword().length() > 0) {
 			d.setPassword(encoder.encode(d.getPassword()));
 		}
@@ -67,6 +66,7 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 		return usuarioConverter.entityToDto(e);
 	}
 
+	@Override
 	public UserDTO favoritePet(String userId, String petId) throws MascotAppException {
 		User u = userRepository.getById(userId);
 		u.setFavoritePet(petRepository.getById(petId));
@@ -74,11 +74,6 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 	}
 
 	@Override
-	public UserDTO getOne(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public UserDTO findByEmail(String email) {
 		return usuarioConverter.entityToDto(userRepository.findByEmail(email));
 	}
@@ -86,24 +81,6 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 	@Override
 	public List<UserDTO> getAll() {
 		return usuarioConverter.entitiesToDto(userRepository.findAll());
-	}
-
-	@Override
-	public List<UserDTO> getAll(Pageable page) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserDTO> searchAll(String q) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<UserDTO> searchAll(Pageable page) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -127,6 +104,60 @@ public class UserServiceImpl implements UserService, CRUDService<UserDTO>, UserD
 					permissions);
 		}
 		throw new UsernameNotFoundException("User Not Found with username: " + email);
+	}
+
+	@Override
+	public UserDTO getOne(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDTO desactivate(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> getAll(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> searchAll(String q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> searchAll(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> getAllActives() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> getAllActives(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> searchAllActives(String q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserDTO> searchAllActives(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

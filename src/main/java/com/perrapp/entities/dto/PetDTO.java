@@ -1,8 +1,8 @@
 package com.perrapp.entities.dto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -21,22 +21,22 @@ public final class PetDTO extends AuditDTO {
 
 	private String id;
 
-//	@NotBlank(message = "Name is mandatory")
+	@NotBlank(message = "Apodo es necesario")
 	private String nickname;
 	
-//	@NotBlank(message = "Name is mandatory")
+	@NotBlank(message = "Pet Number es necesacio")
 	private String petNumber;
 	
-//	@NotBlank(message = "Name is mandatory")
+	@NotBlank(message = "Raza es necesario")
 	private String breed;
 
+	@NotBlank(message = "Nacimiento es necesario")
 	private LocalDate born;
 
+	@NotBlank(message = "Dueño es necesario")
 	private String userId;
 	
 	private PictureDTO profilePicture;
 	private String profilePictureB64;
-
-	private List<PictureDTO> pictures = new ArrayList<PictureDTO>();
 
 }

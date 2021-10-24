@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.perrapp.entities.Pet;
@@ -16,19 +17,21 @@ import com.perrapp.entities.dto.PictureDTO;
 import com.perrapp.errors.MascotAppException;
 import com.perrapp.repositories.PetRepository;
 import com.perrapp.repositories.UserRepository;
+import com.perrapp.services.PetService;
 import com.perrapp.utilities.BASE64DecodedMultipartFile;
 
 import lombok.AllArgsConstructor;
 
 @Service("PetService")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class PetServiceImpl {
+public class PetServiceImpl implements PetService {
 
 	private PictureServiceImpl pictureService;
 	private UserRepository userRepository;
 	private PetRepository petRepository;
 	private PetConverter petConverter;
 
+	@Override
 	public PetDTO save(PetDTO d) throws Exception, MascotAppException {
 
 		validator(d);
@@ -55,27 +58,80 @@ public class PetServiceImpl {
 		return petConverter.entityToDto(pet);
 	}
 	
+	@Override
 	public List<PetDTO> getAll() {
 		return petConverter.entitiesToDto(petRepository.findAll());
 	}
 	
+	@Override
 	public List<PetDTO> getAllActives() {
 		return petConverter.entitiesToDto(petRepository.findAllActives());
 	}
 	
+	@Override
 	public List<PetDTO> getAllByUser(String id) {
 		return petConverter.entitiesToDto(petRepository.findAllByUser(id));
 	}
 
-	public PetDTO desactivatePet(String id) {
+	@Override
+	public PetDTO desactivate(String id) {
 		petRepository.desactivatePet(id);
 		return petConverter.entityToDto(petRepository.getById(id));
 	}
 	
+	@Override
 	public void validator(PetDTO d) throws MascotAppException {
 		if (petRepository.findByPetNumber(d.getPetNumber()) != null)
 			throw new MascotAppException("Error: PetNumber is already in use!");
 
+	}
+
+	@Override
+	public PetDTO edit(PetDTO d) throws MascotAppException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PetDTO getOne(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PetDTO> getAll(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PetDTO> searchAll(String q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PetDTO> searchAll(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PetDTO> getAllActives(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PetDTO> searchAllActives(String q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PetDTO> searchAllActives(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

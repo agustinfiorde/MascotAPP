@@ -22,5 +22,7 @@ public final class PictureDTO extends AuditDTO {
 	private String uri;
 
 	private String name;
+	
+	private String pictureB64;
 
 }
