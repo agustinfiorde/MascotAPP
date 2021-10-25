@@ -120,8 +120,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDTO getOne(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioConverter.entityToDto(userRepository.getById(id));
 	}
 
 	@Override

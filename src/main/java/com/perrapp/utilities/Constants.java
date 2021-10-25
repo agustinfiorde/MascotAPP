@@ -11,6 +11,7 @@ public final class Constants {
 	public static final String ROL = "/rol";
 	
 	//Paths
+	public static final String GET_ID = "/get/{id}";
 	public static final String LIST = "/list";
 	public static final String LIST_ACTIVES = "/list-actives";
 	public static final String LIST_ID = "/list/{id}";

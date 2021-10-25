@@ -2,6 +2,7 @@ package com.perrapp.controllers;
 
 import static com.perrapp.utilities.Constants.EDIT;
 import static com.perrapp.utilities.Constants.FAV;
+import static com.perrapp.utilities.Constants.GET_ID;
 import static com.perrapp.utilities.Constants.LIST;
 import static com.perrapp.utilities.Constants.USER;
 
@@ -9,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -42,17 +44,26 @@ public class UserController {
 //		return ResponseEntity.ok(new ResponseDTO("Testing Logs"));
 //	}
 
+	@GetMapping(GET_ID)
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+	public ResponseEntity<ResponseDTO> get(@PathVariable String id) {
+		return ResponseEntity.ok(new ResponseDTO("user", userService.getOne(id)));
+	}
+	
 	@GetMapping(LIST)
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseDTO> list() {
 		return ResponseEntity.ok(new ResponseDTO("users", userService.getAll(), "Estos son los usuarios de la app"));
 	}
 
 	@PatchMapping(EDIT)
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseDTO> edit(@Valid @RequestBody UserDTO dto) throws Exception, MascotAppException {
 		return ResponseEntity.ok(new ResponseDTO("user", userService.edit(dto), "El usuario se edito bien"));
 	}
 
 	@PatchMapping(FAV)
+	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseDTO> favoritePet(@PathVariable String userId,@PathVariable String petId) throws MascotAppException {
 		System.out.println(userService.favoritePet(userId, petId));
 		return ResponseEntity.ok(new ResponseDTO("Exito en asignacion del nuevo favorito"));

@@ -101,8 +101,7 @@ public class PetServiceImpl implements PetService {
 
 	@Override
 	public PetDTO getOne(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return petConverter.entityToDto(petRepository.getById(id));
 	}
 
 	@Override
