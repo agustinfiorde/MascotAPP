@@ -48,13 +48,13 @@ public class UserController {
 	}
 
 	@PatchMapping(EDIT)
-	public ResponseEntity<ResponseDTO> edit(@Valid @RequestBody UserDTO dto) throws MascotAppException {
-		return ResponseEntity.ok(new ResponseDTO("user",userService.edit(dto), "El usuario se edito bien"));
+	public ResponseEntity<ResponseDTO> edit(@Valid @RequestBody UserDTO dto) throws Exception, MascotAppException {
+		return ResponseEntity.ok(new ResponseDTO("user", userService.edit(dto), "El usuario se edito bien"));
 	}
-	
+
 	@PatchMapping(FAV)
 	public ResponseEntity<ResponseDTO> favoritePet(@PathVariable String userId,@PathVariable String petId) throws MascotAppException {
-		userService.favoritePet(userId, petId);
+		System.out.println(userService.favoritePet(userId, petId));
 		return ResponseEntity.ok(new ResponseDTO("Exito en asignacion del nuevo favorito"));
 	}
 

@@ -30,6 +30,7 @@ public final class UserConverter extends Converter<User, UserDTO> {
 		User entity = new User();
 		if (dto.getPassword() != null) dto.setPassword(encoder.encode(dto.getPassword()));
 		entity = modelMapper.map(dto, User.class);
+		if (dto.getId() != null) entity.setId(dto.getId());
 		return entity;
 	}
 

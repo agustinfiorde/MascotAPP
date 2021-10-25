@@ -25,4 +25,8 @@ public interface PetRepository extends JpaRepository<Pet, String> {
 	@Query("update Pet p set p.active = FALSE WHERE p.id LIKE :id")
 	void desactivatePet(@Param("id") String id);
 	
+	@Modifying
+	@Query("update Pet p set p.active = TRUE WHERE p.id LIKE :id")
+	void activatePet(@Param("id") String id);
+	
 }

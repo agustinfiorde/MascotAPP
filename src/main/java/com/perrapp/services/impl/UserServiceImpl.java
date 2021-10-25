@@ -10,17 +10,22 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.perrapp.entities.Role;
 import com.perrapp.entities.User;
 import com.perrapp.entities.converters.UserConverter;
+import com.perrapp.entities.dto.PictureDTO;
 import com.perrapp.entities.dto.UserDTO;
 import com.perrapp.errors.MascotAppException;
 import com.perrapp.repositories.PetRepository;
+import com.perrapp.repositories.RoleRepository;
 import com.perrapp.repositories.UserRepository;
+import com.perrapp.services.PictureService;
+import com.perrapp.services.RoleService;
 import com.perrapp.services.UserService;
+import com.perrapp.utilities.BASE64DecodedMultipartFile;
+import com.perrapp.utilities.StringUtility;
 
 import lombok.AllArgsConstructor;
 
@@ -28,15 +33,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-	private RoleServiceImpl rolServiceImpl;
+	private RoleService rolServiceImpl;
 	private UserRepository userRepository;
 	private PetRepository petRepository;
+	private RoleRepository roleRepository;
 	private UserConverter usuarioConverter;
-	private PasswordEncoder encoder;
+	private PictureService pictureService;
 
 	@Override
 	public UserDTO save(UserDTO d) throws MascotAppException {
-		d.setPassword(encoder.encode(d.getPassword()));
+		
 		d.setRoles(rolServiceImpl.getRoles());
 
 		validator(d);
@@ -46,24 +52,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public UserDTO edit(UserDTO d) throws MascotAppException {
+	public UserDTO edit(UserDTO d) throws MascotAppException, Exception {
 
-		User e;
-
-		if (d.getPassword().length() > 0) {
-			d.setPassword(encoder.encode(d.getPassword()));
-		}
-
+		PictureDTO picture = pictureService.loadPicture(BASE64DecodedMultipartFile.base64ToMultipart(d.getProfilePictureB64()),
+				d.getId());
+		
+		d.setProfilePicture(picture);
+		
+		User e = usuarioConverter.dtoToEntity(d);
+		
 		if (d.getPassword() == null) {
-			e = userRepository.getById(d.getId());
-			String pass = e.getPassword();
-			d.setPassword(pass);
+			e.setPassword(userRepository.getPassById(d.getId()));
+		}
+		
+		if (d.getRoles() == null) {
+			e.setRoles(roleRepository.getRolesByUser(d.getId()));
 		}
 
-		validator(d);
-		e = userRepository.save(usuarioConverter.dtoToEntity(d));
-
-		return usuarioConverter.entityToDto(e);
+		
+		
+		return usuarioConverter.entityToDto(userRepository.save(e));
 	}
 
 	@Override
@@ -85,8 +93,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public void validator(UserDTO d) throws MascotAppException {
+		
 		if (userRepository.findByEmail(d.getEmail()) != null) {
 			throw new MascotAppException("Error: Email is already in use!");
+		}
+		if (StringUtility.notNullEmpty(d.getEmail())) {
+			throw new MascotAppException("Error: Email is necessary!");
 		}
 	}
 
@@ -156,6 +168,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public List<UserDTO> searchAllActives(Pageable page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDTO activate(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -21,5 +21,6 @@ public final class Constants {
 	public static final String EDIT = "/edit";
 	public static final String DELETE = "/delete/{id}";
 	public static final String CANCEL = "/cancel/{id}";
+	public static final String ACTIVATE = "/activate/{id}";
 	public static final String FAV = "/fav/{userId}/{petId}";
 }

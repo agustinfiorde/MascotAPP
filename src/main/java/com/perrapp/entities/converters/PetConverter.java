@@ -11,7 +11,13 @@ public final class PetConverter extends Converter<Pet, PetDTO> {
 
 	@Override
 	public PetDTO entityToDto(Pet entity) {
-		return modelMapper.map(entity, PetDTO.class);
+
+		PetDTO dto = modelMapper.map(entity, PetDTO.class);
+		
+		dto.setCreatedDate(null);
+		dto.setUpdatedDate(null);
+		
+		return dto;
 	}
 
 	@Override

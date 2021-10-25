@@ -1,5 +1,6 @@
 package com.perrapp.controllers;
 
+import static com.perrapp.utilities.Constants.ACTIVATE;
 import static com.perrapp.utilities.Constants.CANCEL;
 import static com.perrapp.utilities.Constants.LIST;
 import static com.perrapp.utilities.Constants.LIST_ACTIVES;
@@ -59,6 +60,12 @@ public class PetController {
 	public ResponseEntity<ResponseDTO> delete(@PathVariable String id) throws MascotAppException {
 		return ResponseEntity
 				.ok(new ResponseDTO("Se dio de baja la mascota " + petService.desactivate(id).getNickname()));
+	}
+	
+	@PatchMapping(ACTIVATE)
+	public ResponseEntity<ResponseDTO> activate(@PathVariable String id) throws MascotAppException {
+		return ResponseEntity
+				.ok(new ResponseDTO("Se dio de alta la mascota " + petService.activate(id).getNickname()));
 	}
 
 }

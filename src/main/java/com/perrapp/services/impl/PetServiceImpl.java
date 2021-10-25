@@ -18,6 +18,7 @@ import com.perrapp.errors.MascotAppException;
 import com.perrapp.repositories.PetRepository;
 import com.perrapp.repositories.UserRepository;
 import com.perrapp.services.PetService;
+import com.perrapp.services.PictureService;
 import com.perrapp.utilities.BASE64DecodedMultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PetServiceImpl implements PetService {
 
-	private PictureServiceImpl pictureService;
+	private PictureService pictureService;
 	private UserRepository userRepository;
 	private PetRepository petRepository;
 	private PetConverter petConverter;
@@ -76,6 +77,12 @@ public class PetServiceImpl implements PetService {
 	@Override
 	public PetDTO desactivate(String id) {
 		petRepository.desactivatePet(id);
+		return petConverter.entityToDto(petRepository.getById(id));
+	}
+	
+	@Override
+	public PetDTO activate(String id) {
+		petRepository.activatePet(id);
 		return petConverter.entityToDto(petRepository.getById(id));
 	}
 	
@@ -133,5 +140,7 @@ public class PetServiceImpl implements PetService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

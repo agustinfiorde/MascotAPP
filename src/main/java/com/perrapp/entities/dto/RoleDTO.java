@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @JsonInclude(Include.NON_NULL)
-public final class RoleDTO extends AuditDTO {
+public final class RoleDTO {
 
 	private static final long serialVersionUID = 4071780217025039863L;
 

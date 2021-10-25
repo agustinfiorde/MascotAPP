@@ -1,7 +1,8 @@
 package com.perrapp.entities.dto;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @JsonInclude(Include.NON_NULL)
 public final class UserDTO extends AuditDTO {
 
@@ -20,24 +21,24 @@ public final class UserDTO extends AuditDTO {
 
 	private String id;
 
-	private List<RoleDTO> roles = new ArrayList<RoleDTO>();
+	private List<RoleDTO> roles;
 
 	private String name;
 	private String lastName;
 
-//	@NotBlank(message = "Email es necesario")
+	@NotBlank(message = "Email es necesario")
 	private String email;
 
 	private String password;
 
 	private String dni;
 
-	private List<PetDTO> pets = new ArrayList<PetDTO>();
-	
-	private String rolesSelected = "";
-	
+	private List<PetDTO> pets;
+
+	private String rolesSelected;
+
 	private PetDTO favoritePet;
-	
+
 	private PictureDTO profilePicture;
 	private String profilePictureB64;
 
