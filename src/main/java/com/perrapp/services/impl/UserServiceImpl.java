@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	@Override
-	public UserDTO desactivate(String id) {
+	public UserDTO deactivate(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

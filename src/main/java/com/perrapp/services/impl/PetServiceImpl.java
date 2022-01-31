@@ -75,8 +75,8 @@ public class PetServiceImpl implements PetService {
 	}
 
 	@Override
-	public PetDTO desactivate(String id) {
-		petRepository.desactivatePet(id);
+	public PetDTO deactivate(String id) {
+		petRepository.deactivatePet(id);
 		return petConverter.entityToDto(petRepository.getById(id));
 	}
 	
