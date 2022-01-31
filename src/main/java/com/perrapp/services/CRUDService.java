@@ -20,7 +20,7 @@ public interface CRUDService<D> {
 	public D getOne(String id);
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public D desactivate(String id);
+	public D deactivate(String id);
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public D activate(String id);
