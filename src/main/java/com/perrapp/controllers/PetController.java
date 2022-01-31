@@ -71,7 +71,7 @@ public class PetController {
 	@PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseDTO> delete(@PathVariable String id) throws MascotAppException {
 		return ResponseEntity
-				.ok(new ResponseDTO("Se dio de baja la mascota " + petService.desactivate(id).getNickname()));
+				.ok(new ResponseDTO("Se dio de baja la mascota " + petService.deactivate(id).getNickname()));
 	}
 	
 	@PatchMapping(ACTIVATE)
